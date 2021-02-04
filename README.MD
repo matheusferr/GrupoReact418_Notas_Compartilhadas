@@ -21,7 +21,7 @@ Este projeto visa demonstrar a construção de um CRUD utilizando o banco de dad
 
 Você está no repositório da versão Firebase! [Configure a conexão](https://cbt-ifsp-tcc-react.netlify.app/notascompartilhadas) com o banco antes de compilar o aplicativo.
 
-Também temos a [versão offline](https://cbt-ifsp-tcc-react.netlify.app/notascompartilhadas) que utiliza o banco local SQLite.
+Também temos a [versão offline](https://github.com/matheusferr/GrupoReact418_Notas_Compartilhadas/tree/async-storage) que utiliza o banco local SQLite.
 
 ## Instalação
 
