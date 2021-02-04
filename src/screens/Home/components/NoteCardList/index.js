@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import React, { PureComponent, createRef } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
 import { Text } from 'react-native-paper';
 import NoteCard from './components/NoteCard';
-import { noteService } from '../../../../services';
+import noteService from '../../../../services/note.service';
 import styles from './styles';
 
 class NoteCardList extends PureComponent {
@@ -14,8 +14,6 @@ class NoteCardList extends PureComponent {
     this.state = {
       refreshing: false,
     };
-
-    this.flatListRef = createRef();
   }
 
   onRefresh = () => {
@@ -27,15 +25,15 @@ class NoteCardList extends PureComponent {
   }
 
   onHandleSave = (message, id) => {
-    const { refresh } = this.props;
+    const { list, refresh } = this.props;
     console.log(`saving item: ${id}`);
-    noteService.updateNote({ message }, id).then(refresh);
+    noteService.updateNote(list, message, id).then(() => refresh());
   }
 
   onHandleDelete = (id) => {
-    const { refresh } = this.props;
+    const { list, refresh } = this.props;
     console.log(`deleting item: ${id}`);
-    noteService.deleteNote(id).then(refresh);
+    noteService.deleteNote(list, id).then(() => refresh());
   }
 
   //  Extrai as chaves dos items;
@@ -56,11 +54,10 @@ class NoteCardList extends PureComponent {
     const { list } = this.props;
     return (
       <FlatList
-        ref={this.flatListRef}
+        style={styles.container}
         data={list}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
-        //  Impede o fechamento automático do teclado ao editar um item no final da lista;
         removeClippedSubviews={false}
         contentContainerStyle={list.length === 0 ? styles.emptyList : null}
         ListEmptyComponent={(
@@ -76,12 +73,10 @@ class NoteCardList extends PureComponent {
 NoteCardList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-    date: PropTypes.shape({
-      nanoseconds: PropTypes.number,
-      seconds: PropTypes.number,
-    }),
-    content: PropTypes.string,
+    message: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
   })).isRequired,
+  refresh: PropTypes.func.isRequired,
 };
 
 export default NoteCardList;

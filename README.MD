@@ -15,19 +15,19 @@ Documentação feita por Rafela Silva e [Welton José](https://github.com/not-le
 
 ## Sobre o Projeto
 
-Este projeto visa demonstrar a construção de um CRUD utilizando o banco de dados Firebase e o React Native.
+Este projeto visa demonstrar a construção de um CRUD utilizando o banco de dados SQLite e o React Native.
 
 ## Nota
 
-Você está no repositório da versão Firebase! [Configure a conexão](https://cbt-ifsp-tcc-react.netlify.app/notascompartilhadas) com o banco antes de compilar o aplicativo.
+Você está no repositório da versão offline! 
 
-Também temos a [versão offline](https://cbt-ifsp-tcc-react.netlify.app/notascompartilhadas) que utiliza o banco local SQLite.
+Também temos a [versão offline](https://github.com/matheusferr/GrupoReact418_Notas_Compartilhadas) que utiliza o banco de dados Firebase.
 
 ## Instalação
 
 Clone este repositório com o comando:
 ```bash
-git clone https://github.com/matheusferr/GrupoReact418_Notas_Compartilhadas.git
+git clone -b async-storage https://github.com/matheusferr/GrupoReact418_Notas_Compartilhadas.git
 ```
 * Entre no diretório **GrupoReact418_Notas_Compartilhadas** e instale as dependências utilizando o Yarn:
 ```bash

@@ -1,44 +1,42 @@
-import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+/*
+ *  Para fins demonstrativos, foi utilizado o Async Storage para simular as ações do Firestore.
+ *  Caso queira migrar para o Firebase, clone o branch Firebase e siga as instruções de instalação
+ *  em https://cbt-ifsp-tcc-react.netlify.app/notascompartilhadas.
+ */
 class NoteService {
-  constructor() {
-    //  Cria ou utiliza (caso já exista) a coleção "notes" no Firebase;
-    this.collection = firestore().collection('notes');
-  }
-
   /*
-   *  Note que todos os métodos dessa classe retornam uma Promise, sendo esta assíncrona, portanto,
-   *  deve-se aguardar a conclusão da mesma por meio da palavra await ou do método then (então).
-   */
+     *  Note que todos os métodos dessa classe retornam uma Promise, sendo esta assíncrona,
+     *  portanto, deve-se aguardar a conclusão da mesma por meio da palavra await ou do método
+     *  then (então).
+     */
 
-  getAllNotes() {
-    //  Seleciona todas as notas por data em ordem crescente;
-    return this.collection.orderBy('date', 'asc').get();
+  //  Seleciona todas as notas
+  getAllNotes = () => AsyncStorage.getItem('@notes')
+
+  //  Insere uma nova nota na coleção;
+  addNewNote = (data, note) => {
+    data.push(note);
+    return AsyncStorage.setItem('@notes', JSON.stringify(data));
   }
 
-  addNewNote(data) {
-    //  Insere uma nova nota na coleção;
-    return this.collection.add(data);
-  }
-
-  updateNote(data, id) {
+  updateNote = (data, newMessage, id) => {
     //  Atualiza uma nota da coleção;
-    return this.collection.doc(id).update(data);
+    const noteIndex = data.findIndex((item) => item.id === id);
+    // eslint-disable-next-line no-param-reassign
+    data[noteIndex].message = newMessage;
+    return AsyncStorage.setItem('@notes', JSON.stringify(data));
   }
 
-  deleteNote(id) {
+  deleteNote = (data, id) => {
+    const noteIndex = data.findIndex((item) => item.id === id);
+    data.splice(noteIndex, 1);
     //  Deleta uma nota específica da coleção;
-    return this.collection.doc(id).delete();
+    return AsyncStorage.setItem('@notes', JSON.stringify(data));
   }
 
-  deleteAll() {
-    //  Deleta todas as notas da coleção;
-    return this.collection.get().then((data) => {
-      data.forEach(({ id }) => {
-        this.collection.doc(id).delete();
-      });
-    });
-  }
+  deleteAll = () => AsyncStorage.setItem('@notes', '');
 }
 
 const noteService = new NoteService();

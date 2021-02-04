@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Button, Card, Paragraph, TextInput,
 } from 'react-native-paper';
-import moment from 'moment';
 import styles from './styles';
 
 class NoteCard extends PureComponent {
@@ -14,6 +13,13 @@ class NoteCard extends PureComponent {
       isEditing: false,
       currentMessage: props.content.message,
     };
+  }
+
+  formatDate = (date) => {
+    const day = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
+    const month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+
+    return `${day}/${month}/${date.getFullYear().toString().substring(2)}`;
   }
 
   //  Salva o texto digitado no state;
@@ -55,12 +61,11 @@ class NoteCard extends PureComponent {
     const { isEditing, currentMessage } = this.state;
     const { content } = this.props;
 
-    //  O módulo moment.js é utilizado para formatar as datas das notas;
     return (
       <Card style={styles.card}>
         <Card.Title
           title={content.id}
-          subtitle={moment(content.date).format('DD/MM/YY')}
+          subtitle={this.formatDate(content.date)}
         />
         <Card.Content>
           {!isEditing ? (<Paragraph>{content.message}</Paragraph>)
@@ -124,11 +129,8 @@ class NoteCard extends PureComponent {
 NoteCard.propTypes = {
   content: PropTypes.shape({
     id: PropTypes.string,
-    date: PropTypes.shape({
-      nanoseconds: PropTypes.number,
-      seconds: PropTypes.number,
-    }),
     message: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,

@@ -6,6 +6,7 @@ import styles from './styles';
 class ActionBar extends PureComponent {
   render() {
     const { addNote, deleteAll } = this.props;
+
     return (
       <Appbar style={styles.bottom}>
         <Appbar.Action
