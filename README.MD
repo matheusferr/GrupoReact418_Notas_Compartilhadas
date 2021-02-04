@@ -2,7 +2,7 @@
 
 ### 
 Código feito por [Bryan Pinheiro](https://github.com/BryanSouza) e [Matheus Ferreira da Costa](https://github.com/matheusferr).
-Documentação feita por [Henrico Lazuroz](https://github.com/hicolazu) e Luisa Toni.
+Documentação feita por Rafela Silva e [Welton José](https://github.com/not-lew).
 
 ## Tabela de conteúdo
 
