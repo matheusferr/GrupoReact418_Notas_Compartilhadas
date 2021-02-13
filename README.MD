@@ -2,6 +2,7 @@
 
 ### 
 Código feito por [Bryan Pinheiro](https://github.com/BryanSouza) e [Matheus Ferreira da Costa](https://github.com/matheusferr).
+
 [Documentação](https://cbt-ifsp-tcc-react.netlify.app/notascompartilhadas) feita por Rafela Silva e [Welton José](https://github.com/not-lew).
 
 ## Tabela de conteúdo
@@ -21,7 +22,7 @@ Este projeto visa demonstrar a construção de um CRUD utilizando o banco de dad
 
 Você está no repositório da versão offline! 
 
-Também temos a [versão offline](https://github.com/matheusferr/GrupoReact418_Notas_Compartilhadas) que utiliza o banco de dados Firebase.
+Também temos a [versão online](https://github.com/matheusferr/GrupoReact418_Notas_Compartilhadas) que utiliza o banco de dados Firebase.
 
 ## Instalação
 
@@ -48,7 +49,7 @@ A aplicação atualizará automaticamente quando você editar o código.
 
 Compila a versão debug e instala nos dipositivos android conectados via **ADB**. Caso não encontre nenhum dispositivo, o emulador será iniciado.
 
-### `yarn android`
+### `yarn ios`
 
 Compila a versão debug e instala no emulador iOS.
 
